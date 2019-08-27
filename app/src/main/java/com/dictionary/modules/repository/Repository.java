@@ -15,9 +15,8 @@ import com.dictionary.modules.models.DefinitionsModel;
 public class Repository {
 
     private static Repository instance;
-    private DefinitionsModel definitionsModel;
-//    private List<DefinitionModel> currencies = new ArrayList<>();
-    private HashMap<String, DefinitionModel> currencyHashMap = new HashMap<>();
+    private List<DefinitionModel> definitions = new ArrayList<>();
+    private HashMap<String, List<DefinitionModel>> definitionCacheHashMap = new HashMap<>();
 
     public static Repository getInstance(){
         if(instance == null){
@@ -26,49 +25,34 @@ public class Repository {
         return instance;
     }
 
-    public synchronized void setCurrencyModels(DefinitionsModel definitionsModel) {
-        List<DefinitionModel> definitionModelList = definitionsModel.getDefinitionModels();
-        Collections.sort(definitionModelList, new Comparator<DefinitionModel>() {
+    public synchronized void setDefinitionsModel(DefinitionsModel definitionsModel) {
+        definitions = definitionsModel.getDefinitionModels();
+
+
+        definitionCacheHashMap.put(definitions.get(0).getWord().toLowerCase(), definitions);
+    }
+
+    public List<DefinitionModel> getDefinitions(String word) {
+        definitions = definitionCacheHashMap.get(word.toLowerCase());
+        return getDefinitions();
+    }
+
+    public List<DefinitionModel> getDefinitions() {
+        return definitions;
+    }
+
+    public void sort(){
+        Collections.sort(definitions, new Comparator<DefinitionModel>() {
             @Override
             public int compare(DefinitionModel definitionModel, DefinitionModel t1) {
                 if (definitionModel != null && t1 != null) {
-                    return definitionModel.getThumbs_up() - t1.getThumbs_up();
+                    return t1.getThumbs_up() - definitionModel.getThumbs_up();
                 } else {
                     return 0;
                 }
             }
         });
-
-        this.definitionsModel = definitionsModel;
-//        currencies = definitionModelList;
-        for (DefinitionModel definitionModel : definitionModelList) {
-            currencyHashMap.put(Double.toString(definitionModel.getDefid()), definitionModel);
-        }
     }
-
-    public List<String> getCurrencyNames() {
-        List<String> currencyNames = new ArrayList<>();
-//        for (DefinitionModel definitionModel : currencies) {
-//            currencyNames.add(definitionModel.getName());
-//        }
-        return currencyNames;
-    }
-
-//    public String getConversionRate(int index){
-//        return currencies.get(index).getPrice();
-//    }
-//
-//    public String getISOCode(int index){
-//        return currencies.get(index).getIso_code();
-//    }
-//
-//    public String getConversionRate(String isoCode){
-//        return currencyHashMap.get(isoCode).getPrice();
-//    }
-
-//    public DefinitionsModel getDefinitionsModel() {
-//        return definitionsModel;
-//    }
 }
 
 

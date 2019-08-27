@@ -35,7 +35,7 @@ public class ExampleInstrumentedTest {
     public void requestEXRates() throws Exception{
         APIServices services =  new APIServices(mainActivityActivityTestRule.getActivity());
 
-        services.getDefinition(new APIServices.CompletionListener() {
+        services.getDefinition("wat", new APIServices.CompletionListener() {
             @Override
             public void onCompletion(Boolean success, Exception error) {
                 assertTrue(success);

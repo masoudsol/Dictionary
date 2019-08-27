@@ -8,11 +8,12 @@ import android.support.annotation.NonNull;
 
 import java.util.List;
 
+import com.dictionary.modules.models.DefinitionModel;
 import com.dictionary.modules.repository.Repository;
 import com.services.APIServices;
 
 public class DictionaryViewModel extends AndroidViewModel {
-    private MutableLiveData<List<String>> definitionMutableLiveData;
+    private MutableLiveData<List<DefinitionModel>> definitionMutableLiveData;
     private Repository repo = Repository.getInstance();
     private APIServices apiServices;
 
@@ -25,17 +26,28 @@ public class DictionaryViewModel extends AndroidViewModel {
     }
 
     public void getDefinition(String word) {
-        apiServices.getDefinition(word, new APIServices.CompletionListener() {
-            @Override
-            public void onCompletion(Boolean success, Exception error) {
-                if (success) {
-                    definitionMutableLiveData.postValue(repo.getCurrencyNames());
+        List<DefinitionModel> definitions = repo.getDefinitions(word);
+
+        //Check to see if we have the definition cached
+        if (definitions != null) {
+            definitionMutableLiveData.postValue(definitions);
+        } else {
+            apiServices.getDefinition(word, new APIServices.CompletionListener() {
+                @Override
+                public void onCompletion(Boolean success, Exception error) {
+                    if (success) {
+                        definitionMutableLiveData.postValue(repo.getDefinitions());
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
-    public LiveData<List<String>> getDefinitionLiveData() {
+    public LiveData<List<DefinitionModel>> getDefinitionLiveData() {
         return definitionMutableLiveData;
+    }
+
+    public void sort() {
+        repo.sort();
     }
 }

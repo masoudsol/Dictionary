@@ -3,6 +3,7 @@ package com.services;
 import android.content.Context;
 import android.util.Log;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -15,6 +16,8 @@ import com.android.volley.toolbox.Volley;
 import com.dictionary.modules.models.DefinitionsModel;
 import com.google.gson.Gson;
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.dictionary.BuildConfig;
 import com.dictionary.modules.repository.Repository;
@@ -47,7 +50,7 @@ public class APIServices {
             public void onEvent(String url, final Object response, final Exception error) {
                 if (error == null) {
                     DefinitionsModel definitionsModel = new Gson().fromJson((String) response, DefinitionsModel.class);
-                    dataProvider.setCurrencyModels(definitionsModel);
+                    dataProvider.setDefinitionsModel(definitionsModel);
                     completionListener.onCompletion(true, error);
 
                 }else {
@@ -93,7 +96,18 @@ public class APIServices {
                 }
 
             }
-        });
+
+
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put("x-rapidapi-host", "mashape-community-urban-dictionary.p.rapidapi.com");
+                params.put("x-rapidapi-key", "254a504de5msh8e59314ea5f212bp19a356jsnc302d33bad69");
+
+                return params;
+            }
+        };
         requestQueue.add(stringRequest);
     }
 }
