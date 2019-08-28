@@ -33,4 +33,16 @@ public class DefinitionModel implements Serializable {
     public String getWord() {
         return word;
     }
+
+    public void setThumbs_up(int thumbs_up) {
+        this.thumbs_up = thumbs_up;
+    }
+
+    public void setThumbs_down(int thumbs_down) {
+        this.thumbs_down = thumbs_down;
+    }
+
+    public void setWord(String word) {
+        this.word = word;
+    }
 }

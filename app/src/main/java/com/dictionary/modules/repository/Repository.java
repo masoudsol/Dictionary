@@ -28,8 +28,9 @@ public class Repository {
     public synchronized void setDefinitionsModel(DefinitionsModel definitionsModel) {
         definitions = definitionsModel.getDefinitionModels();
 
-
-        definitionCacheHashMap.put(definitions.get(0).getWord().toLowerCase(), definitions);
+        if (definitions.size() > 0) {
+            definitionCacheHashMap.put(definitions.get(0).getWord().toLowerCase(), definitions);
+        }
     }
 
     public List<DefinitionModel> getDefinitions(String word) {

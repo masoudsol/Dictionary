@@ -9,4 +9,8 @@ public class DefinitionsModel implements Serializable {
     public List<DefinitionModel> getDefinitionModels() {
         return list;
     }
+
+    public void setList(List<DefinitionModel> list) {
+        this.list = list;
+    }
 }

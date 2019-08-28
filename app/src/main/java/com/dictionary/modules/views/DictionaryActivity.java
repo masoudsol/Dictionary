@@ -71,7 +71,7 @@ public class DictionaryActivity extends AppCompatActivity implements ActivityCom
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 int textlength = charSequence.length();
-                if (textlength==1) {
+                if (textlength>=1) {
                     searchButton.setEnabled(true);
                 } else if (textlength == 0) {
                     searchButton.setEnabled(false);
