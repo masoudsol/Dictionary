@@ -36,6 +36,7 @@ public class DictionaryActivity extends AppCompatActivity implements ActivityCom
     private ProgressBar progressBar;
     private boolean sortVisible = false;
     private boolean sortThumbsUp = true;
+    private TextWatcher textWatcher;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,8 +62,7 @@ public class DictionaryActivity extends AppCompatActivity implements ActivityCom
             }
         });
 
-        inputText = findViewById(R.id.edittext);
-        inputText.addTextChangedListener(new TextWatcher() {
+        textWatcher = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -82,7 +82,9 @@ public class DictionaryActivity extends AppCompatActivity implements ActivityCom
             public void afterTextChanged(Editable editable) {
 
             }
-        });
+        };
+        inputText = findViewById(R.id.edittext);
+        inputText.addTextChangedListener(textWatcher);
 
         searchButton = findViewById(R.id.button);
         searchButton.setOnClickListener(new View.OnClickListener() {
@@ -102,6 +104,7 @@ public class DictionaryActivity extends AppCompatActivity implements ActivityCom
 
         dictionaryViewModel.getDefinitionLiveData().removeObservers(this);
         searchButton.setOnClickListener(null);
+        inputText.removeTextChangedListener(textWatcher);
     }
 
     private void fetchDefinition(){
