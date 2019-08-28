@@ -47,7 +47,7 @@ public class DictionaryViewModel extends AndroidViewModel {
         return definitionMutableLiveData;
     }
 
-    public void sort() {
-        repo.sort();
+    public void sort(boolean sortThumbsUp) {
+        repo.sort(sortThumbsUp);
     }
 }

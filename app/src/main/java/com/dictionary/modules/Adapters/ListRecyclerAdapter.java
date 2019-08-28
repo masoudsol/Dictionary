@@ -18,12 +18,12 @@ public class ListRecyclerAdapter extends RecyclerView.Adapter<ListRecyclerAdapte
 
 
     static class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView definition;
-        TextView thumbsup;
+        TextView definition, thumbsup, thumbsdown;
         MyViewHolder(RelativeLayout v) {
             super(v);
             definition = v.findViewById(R.id.definition);
             thumbsup = v.findViewById(R.id.thumbsup);
+            thumbsdown = v.findViewById(R.id.thumbsdown);
         }
     }
 
@@ -48,6 +48,7 @@ public class ListRecyclerAdapter extends RecyclerView.Adapter<ListRecyclerAdapte
     public void onBindViewHolder(@NonNull ListRecyclerAdapter.MyViewHolder viewHolder, int i) {
         viewHolder.definition.setText(definitionModels.get(i).getDefinition());
         viewHolder.thumbsup.setText(""+definitionModels.get(i).getThumbs_up());
+        viewHolder.thumbsdown.setText(""+definitionModels.get(i).getThumbs_down());
     }
 
     @Override

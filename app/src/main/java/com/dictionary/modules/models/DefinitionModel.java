@@ -22,6 +22,10 @@ public class DefinitionModel implements Serializable {
         return thumbs_up;
     }
 
+    public int getThumbs_down() {
+        return thumbs_down;
+    }
+
     public double getDefid() {
         return defid;
     }

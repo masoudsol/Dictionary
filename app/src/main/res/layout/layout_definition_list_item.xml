@@ -8,18 +8,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/definition"
         android:layout_alignParentStart="true"
-        android:layout_toStartOf="@id/thmubsupimage"
-        />
-
-    <TextView
-        android:layout_width="40dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:id="@+id/thumbsup"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="5dp"
-        android:textColor="@color/colorPrimary"
-        android:textStyle="bold"/>
+        android:layout_toStartOf="@id/thmubsupimage"/>
 
     <ImageView
         android:layout_width="wrap_content"
@@ -30,10 +19,39 @@
         android:src="@drawable/thumsup"
         android:layout_centerVertical="true"/>
 
+    <TextView
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/thmubsdownimage"
+        android:id="@+id/thumbsup"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="5dp"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/thumbsdown"
+        android:id="@+id/thmubsdownimage"
+        android:contentDescription="thumbs up image"
+        android:src="@drawable/thumsdown"
+        android:layout_centerVertical="true"/>
+
+    <TextView
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/thumbsdown"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="5dp"
+        android:textColor="@color/colorAccent"
+        android:textStyle="bold"/>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/grey"
         android:layout_below="@id/definition"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="25dp"/>
 </RelativeLayout>

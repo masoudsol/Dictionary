@@ -41,12 +41,16 @@ public class Repository {
         return definitions;
     }
 
-    public void sort(){
+    public void sort(final boolean sortThumbsUp){
         Collections.sort(definitions, new Comparator<DefinitionModel>() {
             @Override
             public int compare(DefinitionModel definitionModel, DefinitionModel t1) {
                 if (definitionModel != null && t1 != null) {
-                    return t1.getThumbs_up() - definitionModel.getThumbs_up();
+                    if (sortThumbsUp) {
+                        return t1.getThumbs_up() - definitionModel.getThumbs_up();
+                    } else {
+                        return t1.getThumbs_down() - definitionModel.getThumbs_down();
+                    }
                 } else {
                     return 0;
                 }

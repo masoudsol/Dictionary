@@ -35,6 +35,7 @@ public class DictionaryActivity extends AppCompatActivity implements ActivityCom
     private Button searchButton;
     private ProgressBar progressBar;
     private boolean sortVisible = false;
+    private boolean sortThumbsUp = true;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -115,13 +116,19 @@ public class DictionaryActivity extends AppCompatActivity implements ActivityCom
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.sort_menu, menu);
         menu.getItem(0).setVisible(sortVisible);
+        if (sortThumbsUp) {
+            menu.getItem(0).setTitle("Sort by Thumbs up");
+        } else {
+            menu.getItem(0).setTitle("Sort by Thumbs down");
+        }
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        dictionaryViewModel.sort();
+        dictionaryViewModel.sort(sortThumbsUp);
         fetchDefinition();
+        sortThumbsUp = !sortThumbsUp;
         return true;
     }
 }
